@@ -1,0 +1,6 @@
+DIGEST e9bf6343af93770265f63623b8e2875b
+Flemma_001
+def 11:29 <> consistency_lemma_1
+R38:40 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R34:36 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R46:52 Coq.Init.Logic <> eq_refl constr

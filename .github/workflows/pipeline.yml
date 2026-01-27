@@ -1,0 +1,25 @@
+name: Consistency Verification
+
+on: [push, pull_request]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Coq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y coq
+      
+      - name: Install K Framework
+        run: |
+          curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+          . ~/.nix-profile/etc/profile.d/nix.sh
+          nix-env -f https://github.com/kframework/k/archive/v7.1.163.tar.gz -iA k
+          echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
+      
+      - name: Run verification
+        run: ./run_pipeline.sh
