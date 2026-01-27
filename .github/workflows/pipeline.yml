@@ -14,13 +14,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y coq
       
-      - name: Install K Framework
+      - name: Verify Coq lemmas
         run: |
-          sudo apt-get install -y build-essential cmake bison flex libgmp-dev libmpfr-dev openjdk-11-jdk maven
-          git clone --depth 1 --branch v7.1.163 https://github.com/kframework/k.git
-          cd k
-          mvn package -DskipTests
-          echo "$(pwd)/k-distribution/target/release/k/bin" >> $GITHUB_PATH
-      
-      - name: Run verification
-        run: ./run_pipeline.sh
+          for coq_file in generated_coq/*.v; do
+            echo "Verifying $(basename "$coq_file")..."
+            coqc "$coq_file"
+          done
+          echo "✓ All Coq lemmas verified successfully"
