@@ -16,10 +16,11 @@ jobs:
       
       - name: Install K Framework
         run: |
-          curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
-          . ~/.nix-profile/etc/profile.d/nix.sh
-          nix-env -f https://github.com/kframework/k/archive/v7.1.163.tar.gz -iA k
-          echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
+          sudo apt-get install -y build-essential cmake bison flex libgmp-dev libmpfr-dev openjdk-11-jdk maven
+          git clone --depth 1 --branch v7.1.163 https://github.com/kframework/k.git
+          cd k
+          mvn package -DskipTests
+          echo "$(pwd)/k-distribution/target/release/k/bin" >> $GITHUB_PATH
       
       - name: Run verification
         run: ./run_pipeline.sh
