@@ -4,29 +4,20 @@ on: [push, pull_request]
 
 jobs:
   verify:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container:
+      image: runtimeverificationinc/kframework-k:ubuntu-jammy-7.1.282
     
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install Coq and Python
+      - name: Install Coq
         run: |
-          sudo apt-get update
-          sudo apt-get install -y coq python3
+          apt-get update
+          apt-get install -y coq
       
-      - name: Install K Framework via kup
-        run: |
-          bash <(curl https://kframework.org/install)
-          echo "$HOME/.kup/bin" >> $GITHUB_PATH
-          
-      - name: Install K with kup
-        run: |
-          kup install k --version v7.1.163
-      
-      - name: Verify installations
-        run: |
-          kompile --version
-          coqc --version
+      - name: Verify K Framework installation
+        run: kompile --version
       
       - name: Run full pipeline
         run: ./run_pipeline.sh
