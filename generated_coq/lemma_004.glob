@@ -1,6 +1,7 @@
-DIGEST 47df99adcf43c435d09513316eefce64
+DIGEST 034c3a9ea73df9e4d252315c1125116f
 Flemma_004
-def 11:29 <> consistency_lemma_4
-R38:40 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R34:36 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R46:52 Coq.Init.Logic <> eq_refl constr
+def 56:84 <> symbol_LblintersectSet_exists
+R88:90 Coq.Init.Datatypes <> nat ind
+prf 104:137 <> symbol_LblintersectSet_well_formed
+R170:172 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R141:169 lemma_004 <> symbol_LblintersectSet_exists def

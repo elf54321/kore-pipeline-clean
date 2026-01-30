@@ -1,6 +1,7 @@
-DIGEST 47db04b26bc1608523ff4d4060b13d36
+DIGEST a94f8c9ddb8c1a38d6a4f448ce6d2d6b
 Flemma_003
-def 11:29 <> consistency_lemma_3
-R38:40 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R34:36 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R46:52 Coq.Init.Logic <> eq_refl constr
+def 50:72 <> symbol_LblabsInt_exists
+R76:78 Coq.Init.Datatypes <> nat ind
+prf 92:119 <> symbol_LblabsInt_well_formed
+R146:148 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R123:145 lemma_003 <> symbol_LblabsInt_exists def
