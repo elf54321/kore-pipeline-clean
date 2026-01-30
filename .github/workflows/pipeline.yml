@@ -9,25 +9,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install system dependencies
+      - name: Install Coq and Python
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget bison flex libgmp-dev libmpfr-dev pkg-config openjdk-11-jdk python3
+          sudo apt-get install -y coq python3
       
-      - name: Download and install K Framework
+      - name: Install K Framework via kup
         run: |
-          wget https://github.com/runtimeverification/k/releases/download/v7.1.163/kframework_7.1.163_amd64_jammy.deb
-          sudo apt-get install -y ./kframework_7.1.163_amd64_jammy.deb
-      
-      - name: Install Coq
+          bash <(curl https://kframework.org/install)
+          echo "$HOME/.kup/bin" >> $GITHUB_PATH
+          
+      - name: Install K with kup
         run: |
-          sudo apt-get install -y coq
+          kup install k --version v7.1.163
       
       - name: Verify installations
         run: |
           kompile --version
           coqc --version
-          python3 --version
       
       - name: Run full pipeline
         run: ./run_pipeline.sh
