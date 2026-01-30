@@ -5,19 +5,24 @@ on: [push, pull_request]
 jobs:
   verify:
     runs-on: ubuntu-latest
+    container:
+      image: runtimeverificationinc/kframework-k:ubuntu-jammy-latest
     
     steps:
       - uses: actions/checkout@v4
       
       - name: Install Coq
         run: |
-          sudo apt-get update
-          sudo apt-get install -y coq
+          apt-get update
+          apt-get install -y coq
       
-      - name: Verify Coq lemmas
+      - name: Install Python
         run: |
-          for coq_file in generated_coq/*.v; do
-            echo "Verifying $(basename "$coq_file")..."
-            coqc "$coq_file"
-          done
-          echo "✓ All Coq lemmas verified successfully"
+          apt-get install -y python3
+      
+      - name: Verify K Framework installation
+        run: |
+          kompile --version
+      
+      - name: Run full pipeline
+        run: ./run_pipeline.sh
